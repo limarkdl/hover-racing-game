@@ -56,18 +56,16 @@ void main()
 		IModel* isle = isleMesh->CreateModel(cache_arr[0], cache_arr[1], cache_arr[2]);
 	}
 
-	string MODELS[] = { "GarageLarge.x","GarageSmall.x", "IsleCorner.x", "IsleCross.x", "IsleTee.x", "Lamp.x", "TankLarge1.x", "TankLarge2.x", "Tribune2.x",
+	string MODELS[] = {"", "GarageLarge.x","GarageSmall.x", "IsleCorner.x", "IsleCross.x", "IsleTee.x", "Lamp.x", "TankLarge1.x", "TankLarge2.x", "Tribune2.x",
 		"Tribune3.x", "Walkway.x", "Checkpoint.x","Cross.x","Flare.x","Interstellar.x",
 		"IsleStraight.x","race2.x","Skybox 07.x","TankSmall1.x","TankSmall2.x","Tribune1.x","Wall.x","Arrow.x","Box.x","Bullet.x","Cross.x","Cube.x","Cue.x","Dummy.x","Flare.x","Grid.x",
 		"island.x","Match.x","Matchbox.x","minicube.x","Planet.x","PoolBall.x","PoolTable.x","Stars.x","Teapot.x","Torus.x","Tribune3.x","Turret.x","TwoPence.x","water.x","skull.x"};
 	
+	// CONSTRUCTOR STATE // 
+	bool isConstructorMode = true;
 
-	bool isEditorMode = true;
-
-
-
-
-	int counterMODELS = 0;
+	// Stores current chosen model from a MODELS[] for CONSTRUCTOR
+	int counterMODELS = 1;
 
 	float myMatrix[4][4];
 
@@ -96,8 +94,10 @@ void main()
 	IMesh* TankLarge1Mesh = myEngine->LoadMesh("TankLarge1.x");
 	IModel* TankLarge1 = TankLarge1Mesh->CreateModel(220, 0, 0);
 
-	IMesh* TankLarge2Mesh = myEngine->LoadMesh("TankLarge2.x");
+	IMesh* TankLarge2Mesh = myEngine->LoadMesh("skull.x");
 	IModel* TankLarge2 = TankLarge2Mesh->CreateModel(240, 0, 0);
+
+	TankLarge2->Scale(0.1);
 
 	IMesh* Tribune2Mesh = myEngine->LoadMesh("Tribune2.x");
 	IModel* Tribune2 = Tribune2Mesh->CreateModel(260, 0, 0);
@@ -142,7 +142,7 @@ void main()
 		/**** Update your scene each frame here ****/
 
 
-		if (isEditorMode) {
+		if (isConstructorMode) {
 
 
 			if (isCameraM) {
@@ -188,13 +188,12 @@ void main()
 		sphere->SetX(myCamera->GetX());
 		sphere->SetZ(myCamera->GetZ());
 		if (myEngine->GetMouseWheel() != changedWheel) {
-			
 				counterMODELS += myEngine->GetMouseWheelMovement();
+			
 				newMesh->RemoveModel(sphere);
 				newMesh = myEngine->LoadMesh(MODELS[counterMODELS]);
 				sphere = newMesh->CreateModel();
-				
-			changedWheel = myEngine->GetMouseWheel();
+				changedWheel = myEngine->GetMouseWheel();	
 		}
 	
 
@@ -237,11 +236,9 @@ void main()
 
 			}
 		} 
-		
-		
-		
-		
-		
+	
+		ISprite* menu =  myEngine->CreateSprite("floorMetal1.tga",0,0,0);
+		menu->MoveX(0.01f);
 		
 		stringstream outdText2;
 		stringstream currentOBJMatrix;
@@ -269,7 +266,7 @@ void main()
 		
 		
 		if (myEngine->KeyHit(Key_M)) {
-			isEditorMode = !isEditorMode;
+			isConstructorMode = !isConstructorMode;
 		}
 	
 
