@@ -14,34 +14,34 @@ const float kGameSpeed = 100.0f;
 
 
 
+
 void main()
 {
 	// Create a 3D engine (using TLX engine here) and open a window for it
-	I3DEngine* myEngine = New3DEngine( kTLX );
+	I3DEngine* myEngine = New3DEngine(kTLX);
 	myEngine->StartWindowed();
 	IFont* myFont = myEngine->LoadFont("Font1.bmp");
 	// Add default folder for meshes and other media
-	myEngine->AddMediaFolder( "C:\\ProgramData\\TL-Engine\\Media" );
-	myEngine->AddMediaFolder("C:\\ProgramData\\TL-Engine\\Media\\MEDIAEXTRA");
-	myEngine->AddMediaFolder("C:\\ProgramData\\TL-Engine\\Media\\MEDIAASSIGNMENT");
+	/*myEngine->AddMediaFolder( "C:\\ProgramData\\TL-Engine\\Media" );
+	myEngine->AddMediaFolder("C:\\ProgramData\\TL-Engine\\Media\\MEDIAEXTRA");*/
+	myEngine->AddMediaFolder("C:\\Users\\IKostin\\source\\repos\\ASSIGNMENT_GC\\MEDIA");
 
 	bool isCameraM = 'true';
 
 	/**** Set up your scene here ****/
-	IMesh* skyMesh = myEngine->LoadMesh("Skybox2.x");
-	IModel* sky = skyMesh->CreateModel(0, -960, 0);
+	/*IMesh* skyMesh = myEngine->LoadMesh("Skybox2.x");
+	IModel* sky = skyMesh->CreateModel(0, -960, 0);*/
 
-	IMesh* floorMesh = myEngine->LoadMesh("ground.x");
-	IModel* floor = floorMesh->CreateModel();
+	/*IMesh* floorMesh = myEngine->LoadMesh("ground.x");
+	IModel* floor = floorMesh->CreateModel(0, -2, 0);*/
 
 	IMesh* checkpointMesh = myEngine->LoadMesh("Checkpoint.x");
-	IModel* checkpoint1 = checkpointMesh->CreateModel(0,0,0);
-	IModel* checkpoint2 = checkpointMesh->CreateModel(0,0,150);
+	/*IModel* checkpoint1 = checkpointMesh->CreateModel(0, 0, 0);*/
+	IModel* checkpoint2 = checkpointMesh->CreateModel(0, 0, 150);
 
-	
 
 	IMesh* isleMesh = myEngine->LoadMesh("IsleStraight.x");
-	IModel* isle [5];
+	IModel* isle[5];
 
 	const int MAP1_Walls_Num = 5;
 
@@ -56,11 +56,11 @@ void main()
 		IModel* isle = isleMesh->CreateModel(cache_arr[0], cache_arr[1], cache_arr[2]);
 	}
 
-	string MODELS[] = {"", "GarageLarge.x","GarageSmall.x", "IsleCorner.x", "IsleCross.x", "IsleTee.x", "Lamp.x", "TankLarge1.x", "TankLarge2.x", "Tribune2.x",
+	string MODELS[] = { "", "GarageLarge.x","GarageSmall.x", "IsleCorner.x", "IsleCross.x", "IsleTee.x", "Lamp.x", "TankLarge1.x", "TankLarge2.x", "Tribune2.x",
 		"Tribune3.x", "Walkway.x", "Checkpoint.x","Cross.x","Flare.x","Interstellar.x",
-		"IsleStraight.x","race2.x","Skybox 07.x","TankSmall1.x","TankSmall2.x","Tribune1.x","Wall.x","Arrow.x","Box.x","Bullet.x","Cross.x","Cube.x","Cue.x","Dummy.x","Flare.x","Grid.x",
-		"island.x","Match.x","Matchbox.x","minicube.x","Planet.x","PoolBall.x","PoolTable.x","Stars.x","Teapot.x","Torus.x","Tribune3.x","Turret.x","TwoPence.x","water.x","skull.x"};
-	
+		"IsleStraight.x","race2.x","TankSmall1.x","TankSmall2.x","Tribune1.x","Wall.x","Arrow.x","Box.x","Bullet.x","Cross.x","Cube.x","Cue.x","Dummy.x","Flare.x","Grid.x",
+		"island.x","Match.x","Matchbox.x","minicube.x","Planet.x","PoolBall.x","PoolTable.x","Stars.x","Teapot.x","Torus.x","Tribune3.x","Turret.x","TwoPence.x","water.x","skull.x" };
+
 	// CONSTRUCTOR STATE // 
 	bool isConstructorMode = true;
 
@@ -72,9 +72,13 @@ void main()
 	IMesh* race2Mesh = myEngine->LoadMesh("race2.x");
 	IModel* race2 = race2Mesh->CreateModel();
 	race2->SetSkin("sp02-01.jpg");
-	
-	IMesh* garageMesh = myEngine->LoadMesh("GarageLarge.x");
-	IModel* garage = garageMesh->CreateModel(100,0,0);
+
+	/*IMesh* lampMesh = myEngine->LoadMesh("lamp.x");
+	IModel* lampa = lampMesh->CreateModel(0,7,-5);
+	lampa->RotateLocalY(180);*/
+
+	IMesh* poolTableMesh = myEngine->LoadMesh("PoolTable.x");
+	IModel* poolTable = poolTableMesh->CreateModel(100, 0, 0);
 
 	IMesh* garage2Mesh = myEngine->LoadMesh("GarageSmall.x");
 	IModel* garage2 = garage2Mesh->CreateModel(120, 0, 0);
@@ -91,16 +95,29 @@ void main()
 	IMesh* LampMesh = myEngine->LoadMesh("Lamp.x");
 	IModel* Lamp = LampMesh->CreateModel(200, 0, 0);
 
-	IMesh* TankLarge1Mesh = myEngine->LoadMesh("TankLarge1.x");
-	IModel* TankLarge1 = TankLarge1Mesh->CreateModel(220, 0, 0);
+	IMesh* TankLarge1Mesh = myEngine->LoadMesh("Skybox.x");
+	IModel* TankLarge1 = TankLarge1Mesh->CreateModel(0, -960, 0);
 
-	IMesh* TankLarge2Mesh = myEngine->LoadMesh("skull.x");
-	IModel* TankLarge2 = TankLarge2Mesh->CreateModel(240, 0, 0);
 
-	TankLarge2->Scale(0.1);
 
-	IMesh* Tribune2Mesh = myEngine->LoadMesh("Tribune2.x");
-	IModel* Tribune2 = Tribune2Mesh->CreateModel(260, 0, 0);
+	/*IMesh* TankLarge2Mesh = myEngine->LoadMesh("SkyBox 07.x");
+	IModel* TankLarge2 = TankLarge2Mesh->CreateModel();*/
+
+
+
+	IMesh* CueMesh = myEngine->LoadMesh("Cue.x");
+	IModel* Cue = CueMesh->CreateModel(1, 10, -8);
+	Cue->SetSkin("antenna.jpg");
+	Cue->Scale(0.015);
+	Cue->ScaleX(0.5);
+	Cue->RotateLocalX(-130);
+	/*Cue->RotateLocalY(45);*/
+	
+	IModel* Cue2 = CueMesh->CreateModel(-1, 10, -8);
+	Cue2->Scale(0.015);
+	Cue2->ScaleX(0.5);
+	Cue2->RotateLocalX(-130);
+	
 
 	IMesh* Tribune3Mesh = myEngine->LoadMesh("Tribune3.x");
 	IModel* Tribune3 = Tribune3Mesh->CreateModel(350, 0, 0);
@@ -113,14 +130,49 @@ void main()
 
 	bool CONSTRUCT_MODE = 0;
 
-	
+
 	ICamera* myCamera = myEngine->CreateCamera(kManual);
 	myCamera->RotateLocalX(90);
 
 	float MAP1_WALLS_COORDS[5][4][4];
 
+	IMesh* wallMesh = myEngine->LoadMesh("Wall.x");
+
+	/*float SECTION1[16][3] = { {-20, 0, 0},{-20, 0, 10},{-20, 0, 20},{-20, 0, 30},{-20, 0, 40},{-20, 0, 50},
+		{-20, 0, 60},{-20, 0, 70},{20, 0, 0},{20, 0, 10},{20, 0, 20},{20, 0, 30},{20, 0, 40},{20, 0, 50},{20, 0, 60},{20, 0, 70} };*/
 
 	
+	int z = 0;
+	for (int i = 0; i < 20; i++) {
+		IModel* wall = wallMesh->CreateModel(-20, 0, z);
+		wall->ScaleZ(1.2);
+		z += 8;
+
+	}
+
+	z = 0;
+	for (int i = 0; i < 20; i++) {
+		IModel* wall = wallMesh->CreateModel(20, 0, z);
+		wall->ScaleZ(1.2);
+		z += 8;
+	}
+
+	/*for (int i = 0; i < 20; i++) {
+
+
+	}*/
+
+
+	/*for (int i = 0; i < 16; i++) {
+		int cache_arr[3];
+		for (int j = 0; j < 3; j++) {
+			cache_arr[j] = SECTION1[i][j];
+		}
+		IModel* wall = wallMesh->CreateModel(cache_arr[0], cache_arr[1], cache_arr[2]);
+		wall->ScaleZ(1.2);
+	}*/
+	
+
 	IMesh* newMesh = myEngine->LoadMesh(MODELS[counterMODELS]);
 	IModel* sphere = newMesh->CreateModel(myCamera->GetX(), 0, myCamera->GetZ());
 
@@ -129,8 +181,10 @@ void main()
 	ofstream fw("C:\\TLOUTPUT\\C_PLUSPLUS.txt", std::ofstream::out);
 
 	
+	IMesh* testMesh = myEngine->LoadMesh("Walkway.x");
+	IModel* test = testMesh->CreateModel(30, 0, 100);
 
-
+	test->ScaleX(10);
 
 
 	// The main game loop, repeat until engine is stopped
@@ -189,9 +243,14 @@ void main()
 		sphere->SetZ(myCamera->GetZ());
 		if (myEngine->GetMouseWheel() != changedWheel) {
 				counterMODELS += myEngine->GetMouseWheelMovement();
-			
+				if (counterMODELS == 0) {
+					counterMODELS = 1;
+				}
+				else if (counterMODELS == 45) {
+					counterMODELS = 44;
+				}
 				newMesh->RemoveModel(sphere);
-				newMesh = myEngine->LoadMesh(MODELS[counterMODELS]);
+    				newMesh = myEngine->LoadMesh(MODELS[counterMODELS]);
 				sphere = newMesh->CreateModel();
 				changedWheel = myEngine->GetMouseWheel();	
 		}
@@ -237,8 +296,8 @@ void main()
 			}
 		} 
 	
-		ISprite* menu =  myEngine->CreateSprite("floorMetal1.tga",0,0,0);
-		menu->MoveX(0.01f);
+		//ISprite* menu =  myEngine->CreateSprite("floorMetal1.tga",0,0,0);
+		
 		
 		stringstream outdText2;
 		stringstream currentOBJMatrix;
