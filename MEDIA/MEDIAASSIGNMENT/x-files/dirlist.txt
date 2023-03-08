@@ -1,0 +1,13 @@
+Checkpoint.x
+Cross.x
+dirlist.txt
+Flare.x
+ground.x
+Interstellar.x
+IsleStraight.x
+race2.x
+Skybox 07.x
+TankSmall1.x
+TankSmall2.x
+Tribune1.x
+Wall.x
